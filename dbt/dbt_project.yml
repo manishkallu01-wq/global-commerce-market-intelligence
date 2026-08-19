@@ -1,0 +1,11 @@
+name: commerce_intelligence
+version: 1.0.0
+config-version: 2
+profile: commerce_intelligence
+model-paths: ["models"]
+models:
+  commerce_intelligence:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

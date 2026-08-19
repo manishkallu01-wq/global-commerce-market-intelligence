@@ -1,0 +1,10 @@
+version: 2
+sources:
+  - name: lakehouse
+    schema: external_commerce
+    loaded_at_field: observed_at
+    freshness:
+      warn_after: {count: 36, period: hour}
+      error_after: {count: 72, period: hour}
+    tables:
+      - name: product_offer_snapshot

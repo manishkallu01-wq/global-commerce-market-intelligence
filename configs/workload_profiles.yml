@@ -1,0 +1,13 @@
+profiles:
+  local:
+    annual_input_bytes: 100000000
+    average_compressed_record_bytes: 3000
+  integration:
+    annual_input_bytes: 1000000000000
+    average_compressed_record_bytes: 3000
+  benchmark:
+    annual_input_bytes: 10000000000000
+    average_compressed_record_bytes: 3000
+  production:
+    annual_input_bytes: 1000000000000000
+    average_compressed_record_bytes: 3000

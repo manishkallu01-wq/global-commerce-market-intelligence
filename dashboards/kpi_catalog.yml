@@ -1,0 +1,19 @@
+kpis:
+  observed_products:
+    definition: Distinct resolved products with at least one valid observation
+    grain: day_market
+  valid_offer_rate:
+    definition: Valid offer observations divided by attempted offer observations
+    grain: crawl_market
+  median_price_index:
+    definition: Median observed price divided by the comparable market median
+    grain: product_market_day
+  availability_rate:
+    definition: In-stock observations divided by observations with known availability
+    grain: category_market_day
+  assortment_gap_count:
+    definition: Benchmark products absent from the selected merchant or market
+    grain: brand_category_market_week
+  elevated_risk_events:
+    definition: Relevant GDELT events above the configured severity threshold
+    grain: organization_market_day

@@ -1,0 +1,13 @@
+{
+  "run_type": "deterministic_local_fixture",
+  "source_pages": 2,
+  "source_bytes": 1114,
+  "product_offer_rows": 3,
+  "valid_offer_rows": 3,
+  "valid_offer_rate": 1.0,
+  "distinct_brands": 2,
+  "currencies": [
+    "USD"
+  ],
+  "production_claim": false
+}

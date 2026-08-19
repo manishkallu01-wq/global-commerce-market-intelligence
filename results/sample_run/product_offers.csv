@@ -1,0 +1,4 @@
+source_url,crawl_id,observed_at,name,brand,sku,gtin,price,currency,availability,seller
+https://fixture.invalid/store_a.html,LOCAL-FIXTURE,2026-01-01T00:00:00+00:00,Trail Runner X1,Northstar,NS-X1,0000000000001,119.99,USD,https://schema.org/InStock,Summit Store
+https://fixture.invalid/store_b.html,LOCAL-FIXTURE,2026-01-01T00:00:00+00:00,Trail Runner X1,Northstar,NS-X1,0000000000001,109.99,USD,https://schema.org/OutOfStock,City Shoes
+https://fixture.invalid/store_b.html,LOCAL-FIXTURE,2026-01-01T00:00:00+00:00,Everyday Pack 20L,Waypoint,WP-20,,64.5,USD,https://schema.org/InStock,City Shoes
