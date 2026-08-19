@@ -96,9 +96,9 @@ S3 remains the system of record. Redshift stores conformed facts, dimensions, ag
 
 The executive page reports observed products, merchants, markets, valid-offer rate, median price index, availability rate and risk-event count. Drill-down pages cover price position, assortment gaps, seller coverage, availability trends, source quality and pipeline cost.
 
-![Commerce intelligence dashboard preview](assets/dashboard-preview.svg)
+![Commerce intelligence dashboard](assets/dashboard-screenshot.png)
 
-The preview uses the committed deterministic fixture results. It shows why pricing and availability must be read together: the fixture's cheaper Trail Runner X1 offer is also out of stock. See the complete [`dashboard specification`](dashboards/README.md).
+The screenshot is produced by the executable dashboard backend from committed curated results. Rebuild the data payload and PNG with `make dashboard`. It shows why pricing and availability must be read together: the fixture's cheaper Trail Runner X1 offer is also out of stock. See the complete [`dashboard specification`](dashboards/README.md).
 
 Interpretation rules are explicit: observations are public-web signals, not audited sales; currency comparisons require a dated FX rate; missing markup is not treated as zero inventory; price outliers require adequate seller coverage; and crawl coverage changes are shown beside business trends.
 
@@ -136,6 +136,16 @@ The committed fixture run processed two pages into three valid product-offer obs
 
 See [`results/sample_run/metrics.json`](results/sample_run/metrics.json), [`product_offers.csv`](results/sample_run/product_offers.csv), and the [`result interpretation`](results/sample_run/interpretation.md). A production claim requires an immutable Common Crawl manifest and measured input bytes.
 
+## 🌐 Genuine-source backend evidence
+
+`scripts/discover_sources.py` executed against the public Common Crawl CDX API and resolved two genuine `CC-MAIN-2025-43` WARC captures with their source URLs, timestamps, digests, filenames, offsets and byte lengths. The committed [`live source manifest`](results/source_discovery/live_manifest.json) preserves that run. GDELT returned a transient upstream error during the same run, which is recorded rather than hidden.
+
+The backend includes byte-range WARC retrieval, GDELT update discovery, deterministic quality quarantine, Databricks Bronze/Silver/Gold jobs, dbt marts and a generated dashboard application. Run live discovery with:
+
+```bash
+PYTHONPATH=. python scripts/discover_sources.py
+```
+
 ## ✅ Definition of done
 
 - Source manifests prove the bytes and records processed.
@@ -152,7 +162,7 @@ The platform processes public crawl data in accordance with applicable source te
 
 ## 🗺️ Delivery status
 
-The repository currently provides the project contract, source strategy, scale calculator, parser baseline, data contracts, dashboard specification and offline validation tests. Cloud deployment modules and production Databricks/dbt jobs are tracked as implementation milestones; they are not described as already deployed.
+The repository provides executable public-source discovery, WARC retrieval, parsing, normalization, quarantine, Databricks Bronze/Silver/Gold jobs, dbt marts, AWS Terraform, orchestration, monitoring, CI and a generated dashboard. Local tests and genuine Common Crawl discovery have been executed. AWS, Databricks, Redshift and petabyte benchmark runs remain environment-dependent and are never presented as deployed without their run evidence.
 
 ## 📄 License
 

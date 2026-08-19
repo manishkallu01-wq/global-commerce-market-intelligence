@@ -9,6 +9,7 @@ from pathlib import Path
 
 from src.extract_product import extract_products
 from src.normalize_offer import normalize_product
+from src.quality import split_quality
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,13 +38,16 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
-    valid = [row for row in rows if row["name"] and row["currency"] and row["price"] is not None]
+    valid, rejected, reject_reasons = split_quality(rows)
+    (output_dir / "quarantine.json").write_text(json.dumps(rejected, indent=2) + "\n")
     summary = {
         "run_type": "deterministic_local_fixture",
         "source_pages": attempted,
         "source_bytes": source_bytes,
         "product_offer_rows": len(rows),
         "valid_offer_rows": len(valid),
+        "rejected_offer_rows": len(rejected),
+        "reject_reasons": reject_reasons,
         "valid_offer_rate": round(len(valid) / len(rows), 4) if rows else 0,
         "distinct_brands": len({row["brand"] for row in valid if row["brand"]}),
         "currencies": sorted({row["currency"] for row in valid}),

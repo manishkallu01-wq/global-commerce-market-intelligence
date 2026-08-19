@@ -14,3 +14,10 @@ jobs:
         with: {python-version: '3.12'}
       - run: pip install -r requirements-dev.txt
       - run: make all
+      - run: python -m compileall -q src scripts spark
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform -chdir=infrastructure fmt -check
+      - run: terraform -chdir=infrastructure init -backend=false
+      - run: terraform -chdir=infrastructure validate
+      - uses: actions/upload-artifact@v4
+        with: {name: dashboard-screenshot, path: assets/dashboard-screenshot.png}

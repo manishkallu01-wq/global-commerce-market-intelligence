@@ -16,3 +16,13 @@ models:
         tests: [not_null]
       - name: observed_offer_count
         tests: [not_null]
+  - name: mart_availability_risk
+    columns:
+      - name: product_key
+        tests: [not_null]
+      - name: availability_rate
+        tests: [not_null]
+  - name: mart_assortment_gap
+    columns:
+      - name: brand_name
+        tests: [not_null]

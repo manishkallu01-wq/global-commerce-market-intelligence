@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-08-19T03:58:42.815137+00:00",
+  "common_crawl": {
+    "status": "success",
+    "collection": "CC-MAIN-2025-43",
+    "query": "commoncrawl.org/get-started",
+    "captures": [
+      {
+        "url": "https://www.commoncrawl.org/get-started",
+        "timestamp": "20251014220259",
+        "filename": "crawl-data/CC-MAIN-2025-43/segments/1759648359293.23/warc/CC-MAIN-20251014214924-20251015004924-00758.warc.gz",
+        "offset": 686242195,
+        "length": 12675,
+        "digest": "D4IRZZ6NS7QW37BB2ODQPCUGG7ISRFGV",
+        "status": "200"
+      },
+      {
+        "url": "https://commoncrawl.org/get-started",
+        "timestamp": "20251016192109",
+        "filename": "crawl-data/CC-MAIN-2025-43/segments/1759648664410.92/warc/CC-MAIN-20251016175923-20251016205923-00549.warc.gz",
+        "offset": 160581106,
+        "length": 12695,
+        "digest": "ZWUFCT57EAYE6Z2QRZ3UF4PQA5TG3BEP",
+        "status": "200"
+      }
+    ]
+  },
+  "gdelt": {
+    "status": "failed",
+    "error": "HTTPError: HTTP Error 502: Bad Gateway"
+  }
+}

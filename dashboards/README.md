@@ -1,8 +1,8 @@
 # 📊 Dashboard specification
 
-![Commerce intelligence dashboard preview](../assets/dashboard-preview.svg)
+![Commerce intelligence dashboard](../assets/dashboard-screenshot.png)
 
-The preview is based entirely on `results/sample_run`. Run `make sample` to reproduce its underlying CSV and metrics.
+The dashboard application is in `dashboard/`. Run `make dashboard` to rebuild its data payload and PNG screenshot from the curated CSV.
 
 ## Dashboard pages
 

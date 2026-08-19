@@ -16,6 +16,19 @@ REQUIRED = [
     "dashboards/kpi_catalog.yml",
     "docs/architecture.md",
     "docs/source_strategy.md",
+    "src/common_crawl.py",
+    "src/gdelt.py",
+    "src/quality.py",
+    "spark/jobs/bronze_ingest.py",
+    "spark/jobs/silver_products.py",
+    "spark/jobs/gold_market_marts.py",
+    "databricks.yml",
+    "dbt/models/marts/mart_price_position.sql",
+    "dbt/models/marts/mart_availability_risk.sql",
+    "dbt/models/marts/mart_assortment_gap.sql",
+    "infrastructure/state_machine.asl.json",
+    "dashboard/index.html",
+    "scripts/build_dashboard.py",
 ]
 
 

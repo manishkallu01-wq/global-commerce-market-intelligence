@@ -4,6 +4,8 @@
   "source_bytes": 1114,
   "product_offer_rows": 3,
   "valid_offer_rows": 3,
+  "rejected_offer_rows": 0,
+  "reject_reasons": {},
   "valid_offer_rate": 1.0,
   "distinct_brands": 2,
   "currencies": [

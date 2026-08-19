@@ -1,0 +1,12 @@
+{
+  "Comment": "Commerce intelligence orchestration contract",
+  "StartAt": "DiscoverSources",
+  "States": {
+    "DiscoverSources": {"Type": "Pass", "Result": {"stage": "source_discovery"}, "Next": "RunDatabricks"},
+    "RunDatabricks": {"Type": "Pass", "Result": {"stage": "bronze_silver_gold"}, "Next": "RunDbt"},
+    "RunDbt": {"Type": "Pass", "Result": {"stage": "warehouse_marts"}, "Next": "QualityGate"},
+    "QualityGate": {"Type": "Choice", "Choices": [{"Variable": "$.quality_passed", "BooleanEquals": true, "Next": "PublishDashboard"}], "Default": "Failed"},
+    "PublishDashboard": {"Type": "Succeed"},
+    "Failed": {"Type": "Fail", "Cause": "Data quality threshold failed"}
+  }
+}

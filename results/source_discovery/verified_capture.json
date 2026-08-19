@@ -1,0 +1,8 @@
+{
+  "provenance": "Common Crawl CDXJ documentation example retrieved 2026-08-18",
+  "documentation_url": "https://commoncrawl.org/cdxj-index",
+  "collection": "CC-MAIN-2025-43",
+  "capture": {"url":"https://commoncrawl.org/get-started","timestamp":"20251016192109","status":"200","digest":"ZWUFCT57EAYE6Z2QRZ3UF4PQA5TG3BEP","length":12695,"offset":160581106,"filename":"crawl-data/CC-MAIN-2025-43/segments/1759648664410.92/warc/CC-MAIN-20251016175923-20251016205923-00549.warc.gz"},
+  "business_rows": 0,
+  "note": "This genuine public capture validates source discovery and WARC addressing. Product findings require product-page captures."
+}

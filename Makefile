@@ -1,4 +1,4 @@
-.PHONY: test validate scale sample all
+.PHONY: test validate scale sample dashboard all
 
 test:
 	python3 -m unittest discover -s tests -v
@@ -12,4 +12,7 @@ scale:
 sample:
 	PYTHONPATH=. python3 scripts/run_sample_pipeline.py
 
-all: test validate scale sample
+dashboard: sample
+	PYTHONPATH=. python3 scripts/build_dashboard.py
+
+all: test validate scale dashboard

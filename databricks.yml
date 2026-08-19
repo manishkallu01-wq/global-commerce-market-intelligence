@@ -1,0 +1,5 @@
+bundle: {name: commerce-intelligence}
+include: [resources/*.yml]
+targets:
+  dev: {default: true, mode: development}
+  prod: {mode: production}
