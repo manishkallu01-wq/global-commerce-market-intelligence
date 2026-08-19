@@ -94,7 +94,7 @@ S3 remains the system of record. Redshift stores conformed facts, dimensions, ag
 
 ## 📊 Dashboard outcomes
 
-The executive page reports observed products, merchants, markets, valid-offer rate, median price index, availability rate and risk-event count. Drill-down pages cover price position, assortment gaps, seller coverage, availability trends, source quality and pipeline cost.
+The executive page reports observed products, merchants, markets, valid-offer rate, median price index, availability rate and risk-event count. Drill-down pages cover price position, assortment gaps, seller coverage, availability trends, source quality and pipeline cost.\n\n![Commerce intelligence dashboard preview](assets/dashboard-preview.svg)\n\nThe preview uses the committed deterministic fixture results. It shows why pricing and availability must be read together: the fixture's cheaper Trail Runner X1 offer is also out of stock. See the complete [`dashboard specification`](dashboards/README.md).
 
 Interpretation rules are explicit: observations are public-web signals, not audited sales; currency comparisons require a dated FX rate; missing markup is not treated as zero inventory; price outliers require adequate seller coverage; and crawl coverage changes are shown beside business trends.
 
