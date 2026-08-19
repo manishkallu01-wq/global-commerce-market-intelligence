@@ -98,7 +98,7 @@ The executive page reports observed products, merchants, markets, valid-offer ra
 
 ![Commerce intelligence dashboard](assets/dashboard-screenshot.png)
 
-The screenshot is produced by the executable dashboard backend from committed curated results. Rebuild the data payload and PNG with `make dashboard`. It shows why pricing and availability must be read together: the fixture's cheaper Trail Runner X1 offer is also out of stock. See the complete [`dashboard specification`](dashboards/README.md).
+The operations dashboard is produced by the executable renderer from committed curated results. It includes filters, five KPIs, pricing trend, availability gauge, offer comparison, pipeline health and prioritized alerts. Rebuild the data payload and 2048×1280 PNG with `make dashboard`. See the complete [`dashboard specification`](dashboards/README.md).
 
 Interpretation rules are explicit: observations are public-web signals, not audited sales; currency comparisons require a dated FX rate; missing markup is not treated as zero inventory; price outliers require adequate seller coverage; and crawl coverage changes are shown beside business trends.
 

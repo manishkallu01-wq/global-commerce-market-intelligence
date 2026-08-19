@@ -40,7 +40,7 @@ def main() -> None:
     yaml.safe_load((ROOT / "configs/workload_profiles.yml").read_text())
     yaml.safe_load((ROOT / "dashboards/kpi_catalog.yml").read_text())
     readme = (ROOT / "README.md").read_text()
-    for heading in ("What this project solves", "Genuine open data sources", "Dashboard outcomes"):
+    for heading in ("What this project solves", "Open data sources", "Dashboard outcomes"):
         if heading not in readme:
             raise SystemExit(f"README is missing: {heading}")
     print("Project structure and contracts are valid.")

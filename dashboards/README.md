@@ -4,6 +4,8 @@
 
 The dashboard application is in `dashboard/`. Run `make dashboard` to rebuild its data payload and PNG screenshot from the curated CSV.
 
+The operations view contains sidebar navigation, market and time filters, five KPI cards, a 14-observation price-index trend, availability gauge, offer-level market comparison, pipeline health and prioritized operational alerts. The 14-point trend is a deterministic validation series used to exercise visualization behavior; it is not presented as observed production history.
+
 ## Dashboard pages
 
 | Page | Decision | Measures |
