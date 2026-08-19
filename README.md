@@ -11,8 +11,29 @@
 ![Redshift](https://img.shields.io/badge/Redshift-Warehouse-8C4FFF?logo=amazonredshift&logoColor=white)
 ![dbt](https://img.shields.io/badge/dbt-Analytics-FF694B?logo=dbt&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA?logo=terraform&logoColor=white)
+![CI](https://github.com/manishkallu01-wq/global-commerce-market-intelligence/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-2E8B57)
 
 `aws` `s3` `glue` `kinesis` `databricks` `pyspark` `delta-lake` `redshift` `dbt` `quicksight` `terraform` `data-engineering`
+
+![Global Commerce Market Intelligence operations dashboard](assets/dashboard-screenshot.png)
+
+The screenshot is generated from the committed curated output—not manually assembled. Run `make dashboard` to rebuild the dashboard data and 2048×1280 image.
+
+## 📌 Current implementation
+
+| Capability | Status | Evidence |
+|---|---|---|
+| Common Crawl CDX discovery | Executed | [`live_manifest.json`](results/source_discovery/live_manifest.json) contains two resolved WARC captures |
+| WARC byte-range retrieval | Implemented | [`src/common_crawl.py`](src/common_crawl.py) and [`run_live_commoncrawl.py`](scripts/run_live_commoncrawl.py) |
+| GDELT update ingestion | Implemented; latest run received upstream HTTP 502 | [`src/gdelt.py`](src/gdelt.py) and recorded source-health result |
+| Product extraction and normalization | Executed locally | Parser, normalizer, quality gate and six passing tests |
+| Databricks Bronze/Silver/Gold | Implemented, not deployed | [`spark/jobs`](spark/jobs) and [`databricks.yml`](databricks.yml) |
+| Redshift/dbt serving layer | Implemented, not deployed | dbt staging and three business marts |
+| AWS platform | Terraform implemented, not applied | S3, Kinesis, Glue, Step Functions, IAM, monitoring, budget and optional Redshift Serverless |
+| Operations dashboard | Generated and verified | [`dashboard-screenshot.png`](assets/dashboard-screenshot.png) and reproducible renderer |
+| Petabyte benchmark | Not executed | Production contract is 1 PB/year; no PB result is claimed |
 
 ## 🎯 What this project solves
 
@@ -81,24 +102,20 @@ S3 remains the system of record. Redshift stores conformed facts, dimensions, ag
 
 ## 🧱 Data model
 
-| Model | Grain | Business use |
-|---|---|---|
-| `fct_product_offer_snapshot` | Product × seller × page × observation time | Price and availability history |
-| `fct_market_risk_event` | GDELT event × organization × location | Market and supply-chain monitoring |
-| `dim_product` | Resolved product | Comparable product identity |
-| `dim_merchant` | Canonical merchant/domain | Seller coverage |
-| `dim_market` | Country/region/currency | Geographic comparison |
-| `mart_price_position` | Product × market × day | Price index and outlier detection |
-| `mart_assortment_gap` | Brand × category × market × week | Missing-range opportunities |
-| `mart_availability_risk` | Product/category × market × day | Stock-out trends and risk context |
+| Model | Grain | Status | Business use |
+|---|---|---|---|
+| `stg_product_offers` | Source offer observation | Implemented | Typed, standardized Redshift staging contract |
+| `mart_price_position` | Product × currency × day | Implemented | Price range, median, seller coverage and index |
+| `mart_assortment_gap` | Brand × week | Implemented | Observed range and seller breadth |
+| `mart_availability_risk` | Product × day | Implemented | Known availability rate and affected sellers |
+| `fct_market_risk_event` | Event × organization × location | Target | GDELT risk attribution after successful feed ingestion |
+| `dim_product`, `dim_merchant`, `dim_market` | Conformed entity | Target | Durable entity resolution for production history |
 
 ## 📊 Dashboard outcomes
 
 The executive page reports observed products, merchants, markets, valid-offer rate, median price index, availability rate and risk-event count. Drill-down pages cover price position, assortment gaps, seller coverage, availability trends, source quality and pipeline cost.
 
-![Commerce intelligence dashboard](assets/dashboard-screenshot.png)
-
-The operations dashboard is produced by the executable renderer from committed curated results. It includes filters, five KPIs, pricing trend, availability gauge, offer comparison, pipeline health and prioritized alerts. Rebuild the data payload and 2048×1280 PNG with `make dashboard`. See the complete [`dashboard specification`](dashboards/README.md).
+The operations dashboard includes filters, five KPIs, a pricing trend, availability gauge, offer comparison, pipeline health and prioritized alerts. See the complete [`dashboard specification`](dashboards/README.md).
 
 Interpretation rules are explicit: observations are public-web signals, not audited sales; currency comparisons require a dated FX rate; missing markup is not treated as zero inventory; price outliers require adequate seller coverage; and crawl coverage changes are shown beside business trends.
 
@@ -106,16 +123,23 @@ Interpretation rules are explicit: observations are public-web signals, not audi
 
 ```text
 .
+├── .github/workflows/     # CI validation and dashboard artifact generation
+├── assets/                # Architecture artwork and generated dashboard screenshot
 ├── configs/              # Versioned workload profiles
 ├── contracts/            # Source and curated data contracts
-├── dashboards/           # KPI definitions and dashboard specification
-├── dbt/                  # Redshift staging, facts, marts and tests
+├── dashboard/            # Browser dashboard application and generated data payload
+├── dashboards/           # KPI catalog, interpretation and page specification
+├── dbt/                  # Redshift staging, marts, freshness rules and tests
 ├── docs/                 # Business case, architecture and source notes
-├── infrastructure/       # Terraform modules and environments
-├── notebooks/            # Exploration only; production logic stays in src
-├── scripts/              # Reproducible validation and scale commands
-├── src/                  # Ingestion, parsing and PySpark transformations
-└── tests/                # Unit and contract tests
+├── infrastructure/       # AWS Terraform and Step Functions definition
+├── resources/            # Databricks job resources
+├── results/              # Curated sample output and genuine-source manifests
+├── scripts/              # Discovery, validation, scale and dashboard commands
+├── spark/jobs/           # Databricks Bronze, Silver and Gold PySpark jobs
+├── src/                  # Common Crawl, GDELT, parsing, normalization and quality logic
+├── tests/                # Unit, parsing, range-addressing and quality tests
+├── databricks.yml        # Databricks Asset Bundle entry point
+└── Makefile              # Reproducible local workflow
 ```
 
 ## 🚀 Reproduce locally
@@ -125,6 +149,15 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements-dev.txt
 make all
+```
+
+`make all` runs six tests, validates required contracts, calculates the production scale profile, rebuilds the curated fixture output and regenerates the dashboard screenshot.
+
+Optional commands:
+
+```bash
+PYTHONPATH=. python scripts/discover_sources.py
+make dashboard
 python scripts/estimate_scale.py --profile production
 ```
 
