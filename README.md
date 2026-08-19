@@ -19,8 +19,6 @@
 
 ![Global Commerce Market Intelligence operations dashboard](assets/dashboard-screenshot.png)
 
-The screenshot is generated from the committed curated output—not manually assembled. Run `make dashboard` to rebuild the dashboard data and 2048×1280 image.
-
 ## 📌 Current implementation
 
 | Capability | Status | Evidence |
