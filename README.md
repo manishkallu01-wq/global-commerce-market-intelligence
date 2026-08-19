@@ -26,7 +26,7 @@ The dashboard supports five decisions:
 4. **Seller coverage:** Which merchants and regions offer the strongest coverage?
 5. **Risk:** Which news and supply-chain events may explain sudden market changes?
 
-## 📦 Genuine open data sources
+## 📦 Open data sources
 
 | Source | Data used | Delivery | Role |
 |---|---|---|---|
