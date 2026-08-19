@@ -1,0 +1,22 @@
+# 📊 Dashboard specification
+
+![Commerce intelligence dashboard preview](../assets/dashboard-preview.svg)
+
+The preview is based entirely on `results/sample_run`. Run `make sample` to reproduce its underlying CSV and metrics.
+
+## Dashboard pages
+
+| Page | Decision | Measures |
+|---|---|---|
+| Executive overview | Where does the market need attention? | Offers, products, sellers, validity and freshness |
+| Price position | Where are prices uncompetitive? | Median, price index, spread and seller count |
+| Assortment gaps | Which products or brands are missing? | Expected range, observed range and gaps |
+| Availability risk | Where are stock-outs increasing? | Known availability rate and affected sellers |
+| Market risk | What external events may explain change? | Relevant GDELT events, severity and geography |
+| Data operations | Can the analysis be trusted? | Coverage, rejects, duplicates, throughput and cost |
+
+## Interpretation
+
+The sample contains three valid offers from two sellers. Trail Runner X1 is $119.99 at Summit Store and $109.99 at City Shoes, a $10 observed difference. The cheaper observation is out of stock, demonstrating why price and availability must be interpreted together. Two of three known observations are in stock, producing a 67% fixture availability rate.
+
+These findings validate transformation and visualization behavior only. They do not describe a real market.
